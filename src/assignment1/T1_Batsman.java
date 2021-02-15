@@ -4,7 +4,7 @@ public class T1_Batsman {
 
 	public static void main(String[] args) {
 
-				Batsman batsman1 = new Batsman();
+				Batsman1 batsman1 = new Batsman1();
 				batsman1.name = "Sehwag ";
 				batsman1.runsScored = 973;
 				batsman1.centuries = 4;
@@ -23,7 +23,7 @@ public class T1_Batsman {
 				System.out.println("Strike Rate : " + batsman1.getStrikeRate());
 				System.out.println("RunsScoredInBoundaries : " + batsman1.getRunsScoredInBoundaries());
 
-				Batsman batsman2 = new Batsman();
+				Batsman1 batsman2 = new Batsman1();
 				batsman2.setData("AB de Villers", 687, 1, 6, 407, 57, 37);
 				System.out.println("Name : " + batsman2.name);
 				System.out.println("Runs Scored : " + batsman2.runsScored);

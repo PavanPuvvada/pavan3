@@ -1,40 +1,196 @@
 package assignment1;
 
-public class T_03_Espncricinfo {
-	public static void main(String[] args) {
+import java.text.DecimalFormat;
 
-			Batsman batsman1 = new Batsman();
-			batsman1.name = "Virak Kohli";
-			batsman1.runsScored = 973;
-			batsman1.centuries = 4;
-			batsman1.halfCenturies = 7;
-			batsman1.ballsFaced = 640;
-			batsman1.fours = 83;
-			batsman1.sixes = 38;
+class Batsman {
+	private String name;
+	private int runsScored;
+	private int centuries;
+	private int halfCenturies;
+	private int ballsFaced;
+	private int fours;
+	private int sixes;
+	private int id;
 
-			System.out.println("Name : " + batsman1.name);
-			System.out.println("Runs Scored : " + batsman1.runsScored);
-			System.out.println("Balls Faced : " + batsman1.ballsFaced);
-			System.out.println("Centuries : " + batsman1.centuries);
-			System.out.println("Half Centuries : " + batsman1.halfCenturies);
-			System.out.println("Fours : " + batsman1.fours);
-			System.out.println("Sixes : " + batsman1.sixes);
-			System.out.println("Strike Rate : " + batsman1.getStrikeRate());
-			System.out.println("RunsScoredInBoundaries : " + batsman1.getRunsScoredInBoundaries());
+	private static int idGenerator = 100000;
 
-			Batsman batsman2 = new Batsman();
-			batsman2.setData("AB de Villers", 687, 1, 6, 407, 57, 37);
-			System.out.println("Name : " + batsman2.name);
-			System.out.println("Runs Scored : " + batsman2.runsScored);
-			System.out.println("Balls Faced : " + batsman2.ballsFaced);
-			System.out.println("Centuries : " + batsman2.centuries);
-			System.out.println("Half Centuries : " + batsman2.halfCenturies);
-			System.out.println("Fours : " + batsman2.fours);
-			System.out.println("Sixes : " + batsman2.sixes);
-			System.out.println("Strike Rate : " + batsman2.getStrikeRate());
-			System.out.println("RunsScoredInBoundaries : " + batsman2.getRunsScoredInBoundaries());
+	public Batsman() {
+		this.id = ++idGenerator;
+	}
+
+	public Batsman(String name, int runsScored, int centuries, int halfCenturies, int ballsFaced, int fours,
+			int sixes) {
+		this.id = ++idGenerator;
+		this.name = name;
+		this.runsScored = runsScored;
+		this.centuries = centuries;
+		this.halfCenturies = halfCenturies;
+		this.ballsFaced = ballsFaced;
+		this.fours = fours;
+		this.sixes = sixes;
+	}
+
+	public Batsman getData() {
+		return this;
+	}
+
+	public float getStrikeRate() {
+
+		return (this.runsScored / 100) * this.ballsFaced;
+	}
+
+	public int getRunsScoredInBoundaries() {
+		return (this.fours * 4) + (this.sixes * 6);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getRunsScored() {
+		return runsScored;
+	}
+
+	public int getCenturies() {
+		return centuries;
+	}
+
+	public int getHalfCenturies() {
+		return halfCenturies;
+	}
+
+	public int getBallsFaced() {
+		return ballsFaced;
+	}
+
+	public int getFours() {
+		return fours;
+	}
+
+	public int getSixes() {
+		return sixes;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setRunsScored(int runsScored) {
+		this.runsScored = runsScored;
+	}
+
+	public void setCenturies(int centuries) {
+		this.centuries = centuries;
+	}
+
+	public void setHalfCenturies(int halfCenturies) {
+		this.halfCenturies = halfCenturies;
+	}
+
+	public void setBallsFaced(int ballsFaced) {
+		this.ballsFaced = ballsFaced;
+	}
+
+	public void setFours(int fours) {
+		this.fours = fours;
+	}
+
+	public void setSixes(int sixes) {
+		this.sixes = sixes;
+	}
+
+	public static void setIdGenerator(int idGenerator) {
+		Batsman.idGenerator = idGenerator;
+	}
+
+}
+
+class Espncricinfo1 {
+
+	// 1st specification
+	final private int SIZE = 50;
+	private Batsman[] batsmans = new Batsman[SIZE];
+	private int noOfBatsmen = 0;
+
+	// 2nd specification
+	public Batsman[] getBatsmans() {
+		return batsmans;
+	}
+
+	// 3rd specification
+	public int getNoOfBatsmen() {
+		return noOfBatsmen;
+	}
+
+	// 4th specification
+	public int addBatsman(String name, int runsScored, int centuries, int halfCenturies, int ballsFaced, int fours,
+			int sixes) {
+		if (noOfBatsmen < SIZE - 1) {
+
+			batsmans[noOfBatsmen] = new Batsman(name, runsScored, centuries, halfCenturies, ballsFaced, fours, sixes);
+			noOfBatsmen++;
+			return batsmans[noOfBatsmen - 1].getId();
+
+		} else {
+			return 0;
+		}
+
+	}
+
+	// // 5th specification
+	public Batsman updateBatsmanStats(int id, int runsScored, int fours, int sixes, int ballsFaced) {
+
+		for (int i = 0; i <= SIZE; i++) {
+			if (id == batsmans[i].getId()) {
+				batsmans[i].setRunsScored(runsScored);
+				batsmans[i].setFours(fours);
+				batsmans[i].setSixes(sixes);
+				batsmans[i].setBallsFaced(ballsFaced);
+				return batsmans[i];
+			}
+
+		}
+		return null;
+
+	}
+
+	// 6th specification
+	public Batsman getBatsman(int batsmanid) {
+		for (int i = 0; i <= SIZE; i++) {
+			if (batsmanid == batsmans[i].getId()) {
+				return batsmans[i];
+			}
+
+		}
+		return null;
 
 	}
 }
 
+public class T_03_Espncricinfo {
+	public static void main(String[] args) {
 
+		Espncricinfo1 espncricinfo = new Espncricinfo1();
+		espncricinfo.addBatsman("AB de Villers", 687, 1, 6, 407, 57, 37);
+		espncricinfo.addBatsman("Virak Kohli", 973, 4, 7, 670, 83, 38);
+		espncricinfo.updateBatsmanStats(100001, 45, 5, 1, 33);
+
+		Batsman batsman = espncricinfo.getBatsman(100002);
+		if (null != batsman) {
+			System.out.println("ID :" + batsman.getId());
+			System.out.println("Name :" + batsman.getName());
+			System.out.println("BallsFaced :" + batsman.getBallsFaced());
+			System.out.println("Centuries :" + batsman.getCenturies());
+			System.out.println("HalfCenturies :" + batsman.getHalfCenturies());
+			System.out.println("Fours :" + batsman.getFours());
+			System.out.println("Sixes :" + batsman.getSixes());
+			System.out.println("RunsScoredInBoundaries :" + batsman.getRunsScoredInBoundaries());
+			System.out.println("RunScored :" + batsman.getRunsScored());
+			System.out.println("StrikeRate :" + batsman.getStrikeRate());
+
+		} else {
+			System.out.println("No Batsman found with given id !!! ");
+		}
+
+	}
+}
