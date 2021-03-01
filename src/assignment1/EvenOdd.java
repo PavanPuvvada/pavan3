@@ -10,7 +10,7 @@ public class EvenOdd {
 		String str = sc.nextLine();
 		char[] ch = str.toCharArray();
 		for (int i = 0; i < str.length(); i++) {
-			if (i % 2 == 0)
+			if (i % 2 != 0)
 				ch[i] = '\0';
 			System.out.print(ch[i]);
 		}
